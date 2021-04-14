@@ -1,8 +1,21 @@
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Details from "./components/Details";
+import List from "./components/List";
+import Navbar from './components/Navbar';
+
 function App() {
   return (
-    <div>
-      <div className="text-pink-500">Wine</div>
-    </div>
+    <Router>
+      <Navbar/>
+      <Switch>
+         <Route exact path="/" component={List}/>
+         <Route exact path="/details/:email" component={Details}/>
+      </Switch>
+    </Router>
   );
 }
 
