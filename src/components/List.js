@@ -5,6 +5,8 @@ import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import { toast } from 'react-toastify';
 import CardLoading from './CardLoading';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { getNodeText } from '@testing-library/dom';
 
 
 function List() {
@@ -22,20 +24,44 @@ function List() {
     const handleBookmark = (name) => {
         toast.success(name + " bookmarked");
     }
-    useEffect(() => {
+
+    const getNextData = () => {
+        setCurrentPage(currentPage+1)
         axios.get(
-        `https://zax5j10412.execute-api.ap-southeast-1.amazonaws.com/dev/api/product/list?page=${currentPage}`
-        )
-        .then(response => {
-            // setData(response.data);
-            setData(response.data.value.products);
-            setLoading(false);
-        })
+            `https://zax5j10412.execute-api.ap-southeast-1.amazonaws.com/dev/api/product/list?page=${currentPage}`
+            )
+            .then(response => {
+                // setData(response.data);
+                setData(productData.concat(response.data.value.products));
+                setLoading(false);
+            })
+    } 
+
+    useEffect(() => {
+        if (currentPage == 1) {
+            axios.get(
+            `https://zax5j10412.execute-api.ap-southeast-1.amazonaws.com/dev/api/product/list?page=${currentPage}`
+            )
+            .then(response => {
+                // setData(response.data);
+                setData(productData.concat(response.data.value.products));
+                setLoading(false);
+            })
+        }
     }, [])
-    console.log(productData);
     
     return (
       <div className="w-10/12 mt-24 lg:mt-20 mb-5 mx-auto">
+          <InfiniteScroll
+            dataLength={productData.length} //This is important field to render the next data
+            next={() => getNextData()}
+            hasMore={true}
+            loader={<CardLoading/>}
+            endMessage={
+                <p style={{ textAlign: 'center' }}>
+                <b>Yay! You have seen it all</b>
+                </p>
+            }>
           {loading ? <CardLoading/> : (
           <div className="grid grid-cols-1 gap-10 justify-between lg:grid-cols-3 sm:grid-cols-2">
                     {productData && productData.map((e, i) => (
@@ -67,6 +93,7 @@ function List() {
                     ))}
           </div>
           )}
+          </InfiniteScroll>
       </div>
     );
   }
