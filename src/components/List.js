@@ -6,7 +6,6 @@ import {useDispatch} from 'react-redux';
 import { toast } from 'react-toastify';
 import CardLoading from './CardLoading';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { getNodeText } from '@testing-library/dom';
 
 
 function List() {
@@ -74,7 +73,9 @@ function List() {
                                     </TransformWrapper>
                                     <div className="w-5/6 mx-auto pb-4 pt-2">
                                         <p className="border border-solid border-yellow-600 px-2 text-yellow-600 text-sm w-max text-center my-2 rounded-sm">{e.grapeVarietes.slice(0, 25)}{e.grapeVarietes.length > 25 ? (<span>...</span>) :null}</p>
-                                        <h3 className="font-bold text-red-900 mt-4">{e.name} {e.vintageYear !== "0" ? (<span>{e.vintageYear}</span>) :null} {e.name.length < 31 ? (<span className="opacity-0">DummyTextToFillSpaces</span>) : null}</h3>
+                                        <Link to={`/details/${e.id}`}>
+                                            <h3 className="font-bold text-red-900 mt-4">{e.name} {e.vintageYear !== "0" ? (<span>{e.vintageYear}</span>) :null} {e.name.length < 31 ? (<span className="opacity-0">DummyTextToFillSpaces</span>) : null}</h3>
+                                        </Link>
                                         <p className="text-sm mb-5 mt-1">{e.region}, {e.country}</p>                   
                                         <div className="grid grid-cols-2">
                                             <div>

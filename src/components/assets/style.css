@@ -1,0 +1,11 @@
+.Toastify__toast--success {
+    --tw-bg-opacity: 1;
+    background-color: rgba(127, 29, 29, var(--tw-bg-opacity)) !important;	
+    font-weight: 500 !important;
+}
+
+.Toastify__toast--error {
+    --tw-bg-opacity: 1;
+    background-color: rgba(245, 158, 11, var(--tw-bg-opacity)) !important;	
+    font-weight: 500 !important;
+}
