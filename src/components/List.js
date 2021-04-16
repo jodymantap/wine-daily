@@ -12,21 +12,27 @@ function List() {
     const [loading, setLoading] = useState(true);
     const [productData, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const isConnected = navigator.onLine;
     const dispatch = useDispatch();
     const handleCart = (qty, name) => {
-        if (qty > 1) {
+        if (qty > 1 && isConnected) {
             dispatch({type: "addtocart"});
             toast.success(name + " added to cart");
+        }
+        else if (qty > 1 && !isConnected) {
+            checkInternetStatus();
         }
         else toast.error(name + " was sold out!");
     }
 
     const handleBookmark = (name) => {
-        toast.success(name + " bookmarked");
+        if(isConnected) {
+            toast.success(name + " bookmarked");
+        } else checkInternetStatus();
     }
 
     function checkInternetStatus() {
-        if(!navigator.onLine) {
+        if(!isConnected) {
             toast.error("Oops! You're offline. Please check your network connection...");
         }
     }
