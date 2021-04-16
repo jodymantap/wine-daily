@@ -39,8 +39,9 @@ function Details() {
     return (
         <div>
             <Link to="/">
-                <button className="lg:mx-20 md:mx-18 mx-11 mt-5 mb-1 rounded-full bg-red-900 text-yellow-500 px-3 font-semibold py-1 focus:outline-none">Browse all</button>
+                <button className="lg:ml-20 md:ml-18 ml-11 mt-5 mb-1 rounded-full bg-red-900 text-yellow-500 px-3 font-semibold py-1 focus:outline-none">Browse all</button>
             </Link>
+                <button className="mt-5 mb-1 lg:inline-block md:inline-block hidden ml-2 rounded-full bg-red-900 text-yellow-500 px-3 font-semibold py-1 focus:outline-none">Products {">"} Detail {">"} {name}</button>
         <div className="flex lg:flex-nowrap md-flex-nowrap flex-wrap lg:mx-20 md:mx-18 mx-auto border p-11 rounded-xl shadow-lg">
             <div className="flex lg:w-auto md:w-auto w-full justify-center">
                 <TransformWrapper>
