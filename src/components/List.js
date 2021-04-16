@@ -20,8 +20,15 @@ function List() {
         }
         else toast.error(name + " was sold out!");
     }
+
     const handleBookmark = (name) => {
         toast.success(name + " bookmarked");
+    }
+
+    function checkInternetStatus() {
+        if(!navigator.onLine) {
+            toast.error("Oops! You're offline. Please check your network connection...");
+        }
     }
 
     const getNextData = () => {
@@ -30,19 +37,18 @@ function List() {
             `https://zax5j10412.execute-api.ap-southeast-1.amazonaws.com/dev/api/product/list?page=${currentPage}`
             )
             .then(response => {
-                // setData(response.data);
                 setData(productData.concat(response.data.value.products));
                 setLoading(false);
             })
     } 
 
     useEffect(() => {
+        checkInternetStatus();
         if (currentPage == 1) {
             axios.get(
             `https://zax5j10412.execute-api.ap-southeast-1.amazonaws.com/dev/api/product/list?page=${currentPage}`
             )
             .then(response => {
-                // setData(response.data);
                 setData(productData.concat(response.data.value.products));
                 setLoading(false);
             })
@@ -68,9 +74,10 @@ function List() {
                                 <div className="shadow-md h-full hover:shadow-2xl">
                                     <TransformWrapper>
                                         <TransformComponent>
-                                            <img src={e.image} alt="test" className="h-52 w-full object-contain" />
+                                            <img src={e.image} alt="test" className="h-52 lg:block md:block hidden w-full object-contain" />
                                         </TransformComponent>
                                     </TransformWrapper>
+                                    <img src={e.image} alt="test" className="h-52 lg:hidden md:hidden w-full object-contain" />
                                     <div className="w-5/6 mx-auto pb-4 pt-2">
                                         <p className="border border-solid border-yellow-600 px-2 text-yellow-600 text-sm w-max text-center my-2 rounded-sm">{e.grapeVarietes.slice(0, 25)}{e.grapeVarietes.length > 25 ? (<span>...</span>) :null}</p>
                                         <Link to={`/details/${e.id}`}>
@@ -86,7 +93,7 @@ function List() {
                                             </div>
                                         </div>
                                         <div className="grid mt-5">
-                                            <button onClick={() => handleCart(e.qty, e.name)} className={`bg-red-900 rounded-lg text-yellow-500 py-2 font-bold focus:outline-none transition duration-150 transform hover:-translate-y-1 ${e.qty < 1 ? "opacity-50" : ""}`}>ADD TO CART</button>
+                                            <button onClick={() => handleCart(e.qty, e.name)} className={`bg-red-900 rounded-lg text-yellow-500 py-2 font-bold focus:outline-none transition duration-150 transform hover:-translate-y-1 ${e.qty < 1 ? "opacity-50" : ""} border-2 border-red-900`}>ADD TO CART</button>
                                             <button onClick={() => handleBookmark(e.name)} className="rounded-lg border-2 border-red-900 text-red-900 py-2 mt-2 focus:outline-none">SAVE FOR LATER</button>
                                         </div>
                                     </div>

@@ -12,12 +12,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './components/assets/style.css';
 import CartButtonforMobile from "./components/CartButtonforMobile";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <Provider store={Store}>
       <Router>
         <Navbar/>
+        <ScrollToTop/>
         <CartButtonforMobile/>
         <ToastContainer/>
         <Switch>
