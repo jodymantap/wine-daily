@@ -1,16 +1,12 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Details from "./components/Details";
 import List from "./components/List";
-import Navbar from './components/Navbar';
-import { Provider } from 'react-redux'; 
-import Store from './redux/Store';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import './components/assets/style.css';
+import Navbar from "./components/Navbar";
+import { Provider } from "react-redux";
+import Store from "./redux/Store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./components/assets/style.css";
 import CartButtonforMobile from "./components/CartButtonforMobile";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -18,13 +14,13 @@ function App() {
   return (
     <Provider store={Store}>
       <Router>
-        <Navbar/>
-        <ScrollToTop/>
-        <CartButtonforMobile/>
-        <ToastContainer/>
+        <Navbar />
+        <ScrollToTop />
+        <CartButtonforMobile />
+        <ToastContainer />
         <Switch>
-          <Route exact path="/" component={List}/>
-          <Route exact path="/details/:id" component={Details}/>
+          <Route exact path="/" component={List} />
+          <Route exact path="/details/:id" component={Details} />
         </Switch>
       </Router>
     </Provider>
